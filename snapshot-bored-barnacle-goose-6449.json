@@ -1,10 +1,9 @@
-
 {
-    "id": "wd3RprKmvr",
-    "name": "Deploy Snapshot - 2026-01-02 11:49:16",
-    "description": "Snapshot created for pipeline deployment from Staging to GIT as part of pipeline Test",
-    "createdAt": "2026-01-02T11:49:16.988Z",
-    "updatedAt": "2026-01-02T11:49:16.988Z",
+    "id": "n7zXVnx9Zw",
+    "name": "Deploy Snapshot - 2026-01-02 12:28:29",
+    "description": "Snapshot created for pipeline deployment from Staging to GIT as part of pipeline Development",
+    "createdAt": "2026-01-02T12:28:29.331Z",
+    "updatedAt": "2026-01-02T12:28:29.331Z",
     "flows": {
         "flows": [
             {
@@ -1212,8 +1211,8 @@
                 "type": "ui-group",
                 "name": "Quality Group",
                 "page": "28d6d82f66efaa89",
-                "width": 6,
-                "height": 1,
+                "width": "3",
+                "height": "2",
                 "order": 2,
                 "showTitle": true,
                 "className": "",
@@ -1226,8 +1225,8 @@
                 "type": "ui-group",
                 "name": "Availablity",
                 "page": "28d6d82f66efaa89",
-                "width": 6,
-                "height": 1,
+                "width": "3",
+                "height": "2",
                 "order": 4,
                 "showTitle": true,
                 "className": "",
@@ -1240,8 +1239,8 @@
                 "type": "ui-group",
                 "name": "Performance Group",
                 "page": "28d6d82f66efaa89",
-                "width": 6,
-                "height": 1,
+                "width": "3",
+                "height": "2",
                 "order": 3,
                 "showTitle": true,
                 "className": "",
@@ -1254,8 +1253,8 @@
                 "type": "ui-group",
                 "name": "OEE Group",
                 "page": "28d6d82f66efaa89",
-                "width": 6,
-                "height": 1,
+                "width": "3",
+                "height": "2",
                 "order": 1,
                 "showTitle": true,
                 "className": "",
@@ -1296,8 +1295,8 @@
                 "type": "ui-group",
                 "name": "Downtime Summery",
                 "page": "28d6d82f66efaa89",
-                "width": 6,
-                "height": 1,
+                "width": "6",
+                "height": "2",
                 "order": 5,
                 "showTitle": true,
                 "className": "",
@@ -1324,7 +1323,7 @@
                 "type": "ui-group",
                 "name": "OEE Trend Over Time",
                 "page": "28d6d82f66efaa89",
-                "width": 6,
+                "width": "12",
                 "height": 1,
                 "order": 9,
                 "showTitle": true,
@@ -7077,7 +7076,7 @@
             }
         ],
         "credentials": {
-            "$": "ea624ea37ee6d49126187db58a8bd57a9F0="
+            "$": "4c494eb654c2c18b1a9a21a6899a5a2bFb0="
         }
     },
     "settings": {
@@ -7114,7 +7113,7 @@
                 "denyList": []
             },
             "httpNodeAuth": {
-                "type": "none",
+                "type": "flowforge-user",
                 "user": "",
                 "pass": ""
             },
