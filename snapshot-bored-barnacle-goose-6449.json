@@ -1,9 +1,9 @@
 {
-    "id": "BovA5mdXv0",
-    "name": "Deploy Snapshot - 2026-01-02 10:30:53",
+    "id": "wd3RprKmvr",
+    "name": "Deploy Snapshot - 2026-01-02 11:49:16",
     "description": "Snapshot created for pipeline deployment from Staging to GIT as part of pipeline Test",
-    "createdAt": "2026-01-02T10:30:53.559Z",
-    "updatedAt": "2026-01-02T10:30:53.559Z",
+    "createdAt": "2026-01-02T11:49:16.988Z",
+    "updatedAt": "2026-01-02T11:49:16.988Z",
     "flows": {
         "flows": [
             {
@@ -7076,7 +7076,7 @@
             }
         ],
         "credentials": {
-            "$": "72995d613962529fa2b95e0030032fe2zTQ="
+            "$": "ea624ea37ee6d49126187db58a8bd57a9F0="
         }
     },
     "settings": {
