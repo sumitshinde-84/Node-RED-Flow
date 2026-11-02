@@ -1,0 +1,713 @@
+{
+    "id": "mgZNpeAJzy",
+    "name": "2.5",
+    "description": "Overview \nUpdated greeting message in the final node of the flow.\n\nFlows\nChanged the payload of the last node from 'Hello Wednesday mk 3' to 'Hello Thursday' and slightly adjusted the x coordinate from 340 to 320.",
+    "createdAt": "2026-09-10T09:35:38.477Z",
+    "updatedAt": "2026-09-10T09:35:38.477Z",
+    "flows": {
+        "flows": [
+            {
+                "id": "FFF0000000000001",
+                "type": "tab",
+                "label": "FlowFuse Device Flow",
+                "disabled": false,
+                "info": ""
+            },
+            {
+                "id": "5f809c8508e0d1cd",
+                "type": "group",
+                "z": "FFF0000000000001",
+                "name": "Trigger a message every second, .3 chance",
+                "style": {
+                    "label": true
+                },
+                "nodes": [
+                    "b2a4dacd5048e17a",
+                    "05669a76e631dd55",
+                    "0b017e07fcebe174",
+                    "51303d3c38298c76",
+                    "3b9dc19d1c3f0a93"
+                ],
+                "x": 54,
+                "y": 79,
+                "w": 692,
+                "h": 82
+            },
+            {
+                "id": "3c33774a23201088",
+                "type": "group",
+                "z": "FFF0000000000001",
+                "name": "Collect data from the edge device and send to the central Node-RED instance",
+                "style": {
+                    "label": true
+                },
+                "nodes": [
+                    "45377e20ce9b7343",
+                    "aa518d8138d01b03",
+                    "8806f6a6b51c730e",
+                    "7962d8d523d717a1",
+                    "e32534568c3d2411",
+                    "b9d13477ac2df90d",
+                    "b6e0f35920e86dd2",
+                    "f6f1682376566bc9",
+                    "35b29e3d15640880",
+                    "54eb1dc38720bc2a",
+                    "af8ee97de1400c94",
+                    "7b0f792e594ea6ac",
+                    "3c43f86861bf7767",
+                    "0a14e33e68ea6d13",
+                    "27cabe4b443b1702",
+                    "9d3da8aa1af3c9e8",
+                    "26c9fd909d1e363e"
+                ],
+                "x": 44,
+                "y": 199,
+                "w": 982,
+                "h": 262
+            },
+            {
+                "id": "507b7e9ce116fec1",
+                "type": "group",
+                "z": "FFF0000000000001",
+                "name": "Clear Sim Data on Deploy",
+                "style": {
+                    "label": true
+                },
+                "nodes": [
+                    "9787435fee11363e",
+                    "211d9098d3b212ad"
+                ],
+                "x": 774,
+                "y": 79,
+                "w": 372,
+                "h": 82
+            },
+            {
+                "id": "45377e20ce9b7343",
+                "type": "project link out",
+                "z": "FFF0000000000001",
+                "g": "3c33774a23201088",
+                "name": "project out 1",
+                "mode": "link",
+                "broadcast": true,
+                "project": "0bcafdeb-2dbf-46f5-b91f-0e91c529832f",
+                "topic": "send",
+                "x": 830,
+                "y": 360,
+                "wires": []
+            },
+            {
+                "id": "aa518d8138d01b03",
+                "type": "change",
+                "z": "FFF0000000000001",
+                "g": "3c33774a23201088",
+                "name": "",
+                "rules": [
+                    {
+                        "t": "set",
+                        "p": "payload.device",
+                        "pt": "msg",
+                        "to": "FF_DEVICE_NAME",
+                        "tot": "env"
+                    },
+                    {
+                        "t": "set",
+                        "p": "payload.snapshot",
+                        "pt": "msg",
+                        "to": "FF_SNAPSHOT_NAME",
+                        "tot": "env"
+                    }
+                ],
+                "action": "",
+                "property": "",
+                "from": "",
+                "to": "",
+                "reg": false,
+                "x": 500,
+                "y": 240,
+                "wires": [
+                    [
+                        "7962d8d523d717a1"
+                    ]
+                ]
+            },
+            {
+                "id": "8806f6a6b51c730e",
+                "type": "debug",
+                "z": "FFF0000000000001",
+                "g": "3c33774a23201088",
+                "name": "debug 1",
+                "active": false,
+                "tosidebar": true,
+                "console": false,
+                "tostatus": false,
+                "complete": "payload",
+                "targetType": "msg",
+                "statusVal": "",
+                "statusType": "auto",
+                "x": 820,
+                "y": 420,
+                "wires": []
+            },
+            {
+                "id": "7962d8d523d717a1",
+                "type": "function",
+                "z": "FFF0000000000001",
+                "g": "3c33774a23201088",
+                "name": "function 1",
+                "func": "const deviceString = msg.payload.device\nconst splitStrings = deviceString.split(' ')\nmsg.payload.device = splitStrings\nreturn msg",
+                "outputs": 1,
+                "timeout": 0,
+                "noerr": 0,
+                "initialize": "",
+                "finalize": "",
+                "libs": [],
+                "x": 660,
+                "y": 240,
+                "wires": [
+                    [
+                        "e32534568c3d2411"
+                    ]
+                ]
+            },
+            {
+                "id": "e32534568c3d2411",
+                "type": "change",
+                "z": "FFF0000000000001",
+                "g": "3c33774a23201088",
+                "name": "",
+                "rules": [
+                    {
+                        "t": "move",
+                        "p": "payload.device",
+                        "pt": "msg",
+                        "to": "payload.store",
+                        "tot": "msg"
+                    },
+                    {
+                        "t": "set",
+                        "p": "payload.device.env",
+                        "pt": "msg",
+                        "to": "payload.store[0]",
+                        "tot": "msg"
+                    },
+                    {
+                        "t": "set",
+                        "p": "payload.device.location",
+                        "pt": "msg",
+                        "to": "payload.store[1]",
+                        "tot": "msg"
+                    },
+                    {
+                        "t": "set",
+                        "p": "payload.device.ipc",
+                        "pt": "msg",
+                        "to": "payload.store[2]",
+                        "tot": "msg"
+                    },
+                    {
+                        "t": "delete",
+                        "p": "payload.store",
+                        "pt": "msg"
+                    },
+                    {
+                        "t": "move",
+                        "p": "payload.snapshot",
+                        "pt": "msg",
+                        "to": "payload.device.version",
+                        "tot": "msg"
+                    },
+                    {
+                        "t": "set",
+                        "p": "payload.data.shift-start",
+                        "pt": "msg",
+                        "to": "",
+                        "tot": "num"
+                    }
+                ],
+                "action": "",
+                "property": "",
+                "from": "",
+                "to": "",
+                "reg": false,
+                "x": 820,
+                "y": 240,
+                "wires": [
+                    [
+                        "9d3da8aa1af3c9e8"
+                    ]
+                ]
+            },
+            {
+                "id": "b9d13477ac2df90d",
+                "type": "function",
+                "z": "FFF0000000000001",
+                "g": "3c33774a23201088",
+                "name": "Natural Temp Generator",
+                "func": "//$PROMPT: Create a fuction node which creates a temperature between 10 and 30 celcius each time it's called. Make the changes between each data point seem natural. Output the value to msg.payload.data.temp, round the temp to one decimal place. retain any information which was stored in msg.payload\nconst minTemp = 10\nconst maxTemp = 30\nconst lastTemp = context.get('lastTemp') || (minTemp + maxTemp) / 2\n\n// Generate a random temperature change between -0.5 and 0.5\nconst tempChange = (Math.random() - 0.5)\n\n// Calculate the new temperature\nlet newTemp = lastTemp + tempChange\n\n// Ensure the new temperature is within bounds\nnewTemp = Math.max(minTemp, Math.min(maxTemp, newTemp))\n\n// Round to one decimal place\nnewTemp = Math.round(newTemp * 10) / 10\n\n// Store the new temperature in context\ncontext.set('lastTemp', newTemp)\n\n// Output the temperature\nmsg.payload.data = msg.payload.data || {}\nmsg.payload.data.temp = newTemp\n\nreturn msg",
+                "outputs": 1,
+                "timeout": 0,
+                "noerr": 0,
+                "initialize": "",
+                "finalize": "",
+                "libs": [],
+                "x": 630,
+                "y": 300,
+                "wires": [
+                    [
+                        "35b29e3d15640880"
+                    ]
+                ]
+            },
+            {
+                "id": "b2a4dacd5048e17a",
+                "type": "inject",
+                "z": "FFF0000000000001",
+                "g": "5f809c8508e0d1cd",
+                "name": "",
+                "props": [],
+                "repeat": ".5",
+                "crontab": "",
+                "once": false,
+                "onceDelay": 0.1,
+                "topic": "",
+                "x": 150,
+                "y": 120,
+                "wires": [
+                    [
+                        "05669a76e631dd55"
+                    ]
+                ]
+            },
+            {
+                "id": "05669a76e631dd55",
+                "type": "random",
+                "z": "FFF0000000000001",
+                "g": "5f809c8508e0d1cd",
+                "name": "",
+                "low": 1,
+                "high": "3",
+                "inte": "true",
+                "property": "payload",
+                "x": 280,
+                "y": 120,
+                "wires": [
+                    [
+                        "0b017e07fcebe174"
+                    ]
+                ]
+            },
+            {
+                "id": "0b017e07fcebe174",
+                "type": "switch",
+                "z": "FFF0000000000001",
+                "g": "5f809c8508e0d1cd",
+                "name": "",
+                "property": "payload",
+                "propertyType": "msg",
+                "rules": [
+                    {
+                        "t": "eq",
+                        "v": "3",
+                        "vt": "num"
+                    }
+                ],
+                "checkall": "true",
+                "repair": false,
+                "outputs": 1,
+                "x": 410,
+                "y": 120,
+                "wires": [
+                    [
+                        "51303d3c38298c76"
+                    ]
+                ]
+            },
+            {
+                "id": "51303d3c38298c76",
+                "type": "change",
+                "z": "FFF0000000000001",
+                "g": "5f809c8508e0d1cd",
+                "name": "",
+                "rules": [
+                    {
+                        "t": "delete",
+                        "p": "payload",
+                        "pt": "msg"
+                    }
+                ],
+                "action": "",
+                "property": "",
+                "from": "",
+                "to": "",
+                "reg": false,
+                "x": 570,
+                "y": 120,
+                "wires": [
+                    [
+                        "3b9dc19d1c3f0a93"
+                    ]
+                ]
+            },
+            {
+                "id": "3b9dc19d1c3f0a93",
+                "type": "link out",
+                "z": "FFF0000000000001",
+                "g": "5f809c8508e0d1cd",
+                "name": "link out 1",
+                "mode": "link",
+                "links": [
+                    "b6e0f35920e86dd2"
+                ],
+                "x": 705,
+                "y": 120,
+                "wires": []
+            },
+            {
+                "id": "b6e0f35920e86dd2",
+                "type": "link in",
+                "z": "FFF0000000000001",
+                "g": "3c33774a23201088",
+                "name": "link in 1",
+                "links": [
+                    "3b9dc19d1c3f0a93"
+                ],
+                "x": 85,
+                "y": 240,
+                "wires": [
+                    [
+                        "0a14e33e68ea6d13"
+                    ]
+                ]
+            },
+            {
+                "id": "f6f1682376566bc9",
+                "type": "function",
+                "z": "FFF0000000000001",
+                "g": "3c33774a23201088",
+                "name": "Set Shift Start Time",
+                "func": "//$PROMPT: Create a function which sets msg.payload.data.shift-start to be 00:00, 08:00, or 16:00, use whichever as past most recently to local time.\nconst now = new Date()\nconst currentHour = now.getHours()\n\nlet shiftStart = '00:00'\n\nif (currentHour >= 16) {\n    shiftStart = '16:00'\n} else if (currentHour >= 8) {\n    shiftStart = '08:00'\n}\n\nfunction generateTarget () {\n    const min = 300\n    const max = 1000\n    return Math.floor(Math.random() * (max - min)) + min\n}\n\nfunction randomBetween (min, max) {\n    return Math.ceil((Math.random() * (max - min)) + min)\n}\n\nfunction generateSimTarget (target) {\n    const diceRoll = Math.random()\n    const pBehindSchedule = 0.2 // 20% of cells will be behind schedule\n    if (diceRoll < pBehindSchedule) {\n        return randomBetween(0.9 * target, target - 1)\n    } else {\n        return randomBetween(target, 1.1 * target)\n    }\n}\n\n// get current shift\nconst activeShift = flow.get('currentShift')\nif (!activeShift || shiftStart !== activeShift) {\n    flow.set('currentShift', shiftStart)\n    const target = generateTarget()\n    flow.set('lineTarget', target) // define our planned target for this shift\n    flow.set('lineSimEnd', generateSimTarget(target)) // simulate the number we will actually reach by the end of the shift\n}\n\n// if no simulated end number yet set, but have already started a shift\nif (!flow.get('lineSimEnd')) {\n    flow.set('lineSimEnd', flow.get('lineTarget')) // simulate the number we will actually reach by the end of the shift\n}\n\nmsg.payload.data['shift-start'] = shiftStart\nreturn msg",
+                "outputs": 1,
+                "timeout": 0,
+                "noerr": 0,
+                "initialize": "",
+                "finalize": "",
+                "libs": [],
+                "x": 210,
+                "y": 300,
+                "wires": [
+                    [
+                        "af8ee97de1400c94"
+                    ]
+                ]
+            },
+            {
+                "id": "35b29e3d15640880",
+                "type": "function",
+                "z": "FFF0000000000001",
+                "g": "3c33774a23201088",
+                "name": "Gradual Cycle Time Setter",
+                "func": "//$PROMPT: Create a function which sets msg.payload.data.cycle-time to be a value between 30 and 45, make the changes in the value gradual\nconst minCycleTime = 30\nconst maxCycleTime = 45\n\nif (!context.get('cycleTime')) {\n    context.set('cycleTime', minCycleTime)\n}\n\nlet currentCycleTime = context.get('cycleTime')\n\n// Determine the direction of change\nlet increasing = context.get('increasing')\nif (increasing === undefined) {\n    increasing = true\n    context.set('increasing', increasing)\n}\n\n// Adjust the cycle time gradually\nif (increasing) {\n    currentCycleTime += 1\n    if (currentCycleTime >= maxCycleTime) {\n        currentCycleTime = maxCycleTime\n        context.set('increasing', false)\n    }\n} else {\n    currentCycleTime -= 1\n    if (currentCycleTime <= minCycleTime) {\n        currentCycleTime = minCycleTime\n        context.set('increasing', true)\n    }\n}\n\n// Save the updated cycle time\ncontext.set('cycleTime', currentCycleTime)\n\n// Set the value in the message payload\nmsg.payload = msg.payload || {}\nmsg.payload.data = msg.payload.data || {}\nmsg.payload.data['cycle-time'] = currentCycleTime\n\nreturn msg",
+                "outputs": 1,
+                "timeout": 0,
+                "noerr": 0,
+                "initialize": "",
+                "finalize": "",
+                "libs": [],
+                "x": 880,
+                "y": 300,
+                "wires": [
+                    [
+                        "54eb1dc38720bc2a"
+                    ]
+                ]
+            },
+            {
+                "id": "54eb1dc38720bc2a",
+                "type": "function",
+                "z": "FFF0000000000001",
+                "g": "3c33774a23201088",
+                "name": "Timed Position Selector",
+                "func": "//$PROMPT: Create a function which selects from one of the following list and outputs the value as msg.payload.data.recipe. front-right, front-left, rear-left, rear-right, rear. Only change the value every 2 minutes. Allow any other values to be passed through the function\nconst positions = ['front-right', 'front-left', 'rear-left', 'rear-right', 'rear']\nlet lastChangeTime = context.get('lastChangeTime') || 0\nlet currentIndex = context.get('currentIndex') || 0\n\nconst now = Date.now()\n\nif (now - lastChangeTime >= 30000) { // 2 minutes in milliseconds\n    currentIndex = (currentIndex + 1) % positions.length\n    lastChangeTime = now\n    context.set('lastChangeTime', lastChangeTime)\n    context.set('currentIndex', currentIndex)\n}\n\nmsg.payload = msg.payload || {}\nmsg.payload.data = msg.payload.data || {}\nmsg.payload.data.recipe = positions[currentIndex]\n\nreturn msg",
+                "outputs": 1,
+                "timeout": 0,
+                "noerr": 0,
+                "initialize": "",
+                "finalize": "",
+                "libs": [],
+                "x": 230,
+                "y": 360,
+                "wires": [
+                    [
+                        "7b0f792e594ea6ac"
+                    ]
+                ]
+            },
+            {
+                "id": "af8ee97de1400c94",
+                "type": "function",
+                "z": "FFF0000000000001",
+                "g": "3c33774a23201088",
+                "name": "Set Next Shift End",
+                "func": "//$PROMPT: Create a function which sets msg.payload.data.shift-end to be 23:30, 7:30, or 15:30, use whichever is next to happen in local time\nconst now = new Date()\nconst currentHour = now.getHours()\nconst currentMinute = now.getMinutes()\n\nlet nextShiftEnd\n\nif (currentHour < 7 || (currentHour === 7 && currentMinute < 30)) {\n    nextShiftEnd = '07:30'\n} else if (currentHour < 15 || (currentHour === 15 && currentMinute < 30)) {\n    nextShiftEnd = '15:30'\n} else {\n    nextShiftEnd = '23:30'\n}\n\n// set flow var for active shift end to calculate simulated parts created later on\nconst activeShiftEnd = flow.get('currentShiftEnd')\nif (!activeShiftEnd || nextShiftEnd !== activeShiftEnd) {\n    flow.set('currentShiftEnd', nextShiftEnd)\n}\n\nmsg.payload.data = msg.payload.data || {}\nmsg.payload.data['shift-end'] = nextShiftEnd\n\nreturn msg",
+                "outputs": 1,
+                "timeout": 0,
+                "noerr": 0,
+                "initialize": "",
+                "finalize": "",
+                "libs": [],
+                "x": 410,
+                "y": 300,
+                "wires": [
+                    [
+                        "b9d13477ac2df90d"
+                    ]
+                ]
+            },
+            {
+                "id": "7b0f792e594ea6ac",
+                "type": "function",
+                "z": "FFF0000000000001",
+                "g": "3c33774a23201088",
+                "name": "Generate Op Mode",
+                "func": "const modes = ['RUNNING', 'STOPPED']\nconst currentMode = flow.get(\"lineOpMode\") || modes[0]\nlet newMode = currentMode\n\nconst pFailure = 1 / 300 // 1 in 5 minutes\nconst pRecovery = 1 / 90 // 1 in 1.5 minutes\n\nconst diceRoll = Math.random()\n\n// check if first time running and we need to set a shift mode start time\nif (!flow.get('startTimeInMode')) {\n    flow.set(\"startTimeInMode\", (new Date()).getTime())\n}\n\nif (currentMode === modes[0]) {\n    // simulate chance to tripping into a failure\n    if (diceRoll < pFailure) {\n        newMode = modes[1]\n        flow.set('startTimeInMode', (new Date()).getTime())    \n    }\n} else {\n    // simulate chance to recovering from failure\n    if (diceRoll < pRecovery) {\n        newMode = modes[0]\n        flow.set('startTimeInMode', (new Date()).getTime())    \n    }\n}\n\nflow.set(\"lineOpMode\", newMode)\n\nmsg.payload.data = msg.payload.data || {}\nmsg.payload.data.opMode = flow.get(\"lineOpMode\")\nmsg.payload.data.opModeDuration = (new Date()).getTime() - flow.get(\"startTimeInMode\") // milliseconds\n\nreturn msg",
+                "outputs": 1,
+                "timeout": 0,
+                "noerr": 0,
+                "initialize": "",
+                "finalize": "",
+                "libs": [],
+                "x": 450,
+                "y": 360,
+                "wires": [
+                    [
+                        "3c43f86861bf7767"
+                    ]
+                ]
+            },
+            {
+                "id": "3c43f86861bf7767",
+                "type": "function",
+                "z": "FFF0000000000001",
+                "g": "3c33774a23201088",
+                "name": "Generate Progress",
+                "func": "const modes = ['RUNNING', 'STOPPED']\nconst currentMode = flow.get(\"lineOpMode\") || modes[0]\n\n// convert shift start/end times to a usable date object\nfunction shiftTimeToDate (time) {\n    const [hours, minutes, seconds] = time.split(':').map(Number)\n    const datetime = new Date()\n    datetime.setHours(hours, minutes, seconds, 0)\n    return datetime\n}\n\n// get simulated actual items made\nfunction getActual () {\n    const now = new Date()\n    const time = shiftTimeToDate(now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds())\n    const shiftStart = shiftTimeToDate(flow.get('currentShift') + ':0')\n    const shiftEnd = shiftTimeToDate(flow.get('currentShiftEnd') + ':0')\n    const duration = shiftEnd.getTime() - shiftStart.getTime()\n    const progress = (time.getTime() - shiftStart.getTime()) / duration\n\n    return parseInt(progress * flow.get('lineSimEnd'))\n}\n\n// Are we running? Only update if we are\nif (currentMode === modes[0]) {\n    flow.set('lineActual', getActual())\n}\n\nmsg.payload.data.progress = {\n    actual: flow.get('lineActual'),\n    target: flow.get('lineTarget')\n}\n\nreturn msg",
+                "outputs": 1,
+                "timeout": 0,
+                "noerr": 0,
+                "initialize": "",
+                "finalize": "",
+                "libs": [],
+                "x": 650,
+                "y": 360,
+                "wires": [
+                    [
+                        "8806f6a6b51c730e",
+                        "45377e20ce9b7343"
+                    ]
+                ]
+            },
+            {
+                "id": "9787435fee11363e",
+                "type": "inject",
+                "z": "FFF0000000000001",
+                "g": "507b7e9ce116fec1",
+                "name": "On Deploy",
+                "props": [],
+                "repeat": "",
+                "crontab": "",
+                "once": true,
+                "onceDelay": 0.1,
+                "topic": "",
+                "x": 890,
+                "y": 120,
+                "wires": [
+                    [
+                        "211d9098d3b212ad"
+                    ]
+                ]
+            },
+            {
+                "id": "211d9098d3b212ad",
+                "type": "change",
+                "z": "FFF0000000000001",
+                "g": "507b7e9ce116fec1",
+                "name": "Clear Cache",
+                "rules": [
+                    {
+                        "t": "delete",
+                        "p": "currentShift",
+                        "pt": "flow"
+                    },
+                    {
+                        "t": "delete",
+                        "p": "currentShiftEnd",
+                        "pt": "flow"
+                    }
+                ],
+                "action": "",
+                "property": "",
+                "from": "",
+                "to": "",
+                "reg": false,
+                "x": 1050,
+                "y": 120,
+                "wires": [
+                    []
+                ]
+            },
+            {
+                "id": "0a14e33e68ea6d13",
+                "type": "ip",
+                "z": "FFF0000000000001",
+                "g": "3c33774a23201088",
+                "name": "ip",
+                "https": false,
+                "timeout": "5000",
+                "internalIPv4": false,
+                "internalIPv6": false,
+                "publicIPv4": true,
+                "publicIPv6": false,
+                "x": 170,
+                "y": 240,
+                "wires": [
+                    [
+                        "27cabe4b443b1702"
+                    ]
+                ]
+            },
+            {
+                "id": "27cabe4b443b1702",
+                "type": "change",
+                "z": "FFF0000000000001",
+                "g": "3c33774a23201088",
+                "name": "",
+                "rules": [],
+                "action": "",
+                "property": "",
+                "from": "",
+                "to": "",
+                "reg": false,
+                "x": 320,
+                "y": 240,
+                "wires": [
+                    [
+                        "aa518d8138d01b03"
+                    ]
+                ]
+            },
+            {
+                "id": "9d3da8aa1af3c9e8",
+                "type": "link out",
+                "z": "FFF0000000000001",
+                "g": "3c33774a23201088",
+                "name": "link out 2",
+                "mode": "link",
+                "links": [
+                    "26c9fd909d1e363e"
+                ],
+                "x": 935,
+                "y": 240,
+                "wires": []
+            },
+            {
+                "id": "26c9fd909d1e363e",
+                "type": "link in",
+                "z": "FFF0000000000001",
+                "g": "3c33774a23201088",
+                "name": "link in 2",
+                "links": [
+                    "9d3da8aa1af3c9e8"
+                ],
+                "x": 85,
+                "y": 300,
+                "wires": [
+                    [
+                        "f6f1682376566bc9"
+                    ]
+                ]
+            },
+            {
+                "id": "132e9b6c11264f4c",
+                "type": "inject",
+                "z": "FFF0000000000001",
+                "name": "",
+                "props": [
+                    {
+                        "p": "payload"
+                    }
+                ],
+                "repeat": "",
+                "crontab": "",
+                "once": false,
+                "onceDelay": 0.1,
+                "topic": "",
+                "payload": "Hello Thursday",
+                "payloadType": "str",
+                "x": 320,
+                "y": 580,
+                "wires": [
+                    [
+                        "cf18fc48055bb482"
+                    ]
+                ]
+            },
+            {
+                "id": "cf18fc48055bb482",
+                "type": "debug",
+                "z": "FFF0000000000001",
+                "name": "debug 2",
+                "active": true,
+                "tosidebar": true,
+                "console": false,
+                "tostatus": false,
+                "complete": "false",
+                "statusVal": "",
+                "statusType": "auto",
+                "x": 560,
+                "y": 580,
+                "wires": []
+            }
+        ],
+        "credentials": {
+            "$": "ecfceac4d547a91e702196e25db61eb3m54="
+        }
+    },
+    "settings": {
+        "settings": {
+            "palette": {
+                "modules": {
+                    "@flowfuse/nr-assistant": "~0.6.0",
+                    "@flowfuse/nr-mqtt-nodes": ">=0.1.0",
+                    "@flowfuse/nr-project-nodes": "~0.7.5",
+                    "@flowfuse/nr-tables-nodes": ">=0.1.0",
+                    "node-red-contrib-cip-ethernet-ip": "~1.1.3",
+                    "node-red-contrib-ip": "~1.0.1",
+                    "node-red-node-random": "~0.4.1"
+                }
+            }
+        },
+        "env": {},
+        "modules": {
+            "@flowfuse/nr-assistant": "~0.6.0",
+            "@flowfuse/nr-mqtt-nodes": ">=0.1.0",
+            "@flowfuse/nr-project-nodes": "~0.7.5",
+            "@flowfuse/nr-tables-nodes": ">=0.1.0",
+            "node-red": "latest",
+            "node-red-contrib-cip-ethernet-ip": "~1.1.3",
+            "node-red-contrib-ip": "~1.0.1",
+            "node-red-node-random": "~0.4.1"
+        }
+    },
+    "ownerType": "device",
+    "user": {
+        "id": "6nkvARPgRx",
+        "username": "robmarcer-flowforge",
+        "name": "Rob Marcer",
+        "avatar": "https://app.flowfuse.com/avatar/Um9iIE1hcmNlcg",
+        "admin": true,
+        "createdAt": "2022-09-12T08:25:14.762Z",
+        "suspended": false,
+        "SSOGroups": []
+    }
+}
